@@ -119,6 +119,12 @@ body {
 .social i:hover {
     transform: scale(1.2);
 }
+.errmsg {
+	color: red;
+	text-align: center;
+	margin: 10px 2px;
+	font-size: 19px;
+}
 @media ( max-width : 500px) {
 	.login-container {
 		padding: 15px;
@@ -132,6 +138,11 @@ body {
 <body>
 	<div class="login-container">
 		<h2>User Login</h2>
+		<% String msg = (String) session.getAttribute("msg");
+		   if (msg != null) { %>
+			   <p class="errmsg"><%= msg %></p>
+		<% }
+		session.removeAttribute("msg"); %>
 		<form action="loginuser" method="post">
 			<div class="form-group">
 				<label for="email">Email Address</label> <input type="email"

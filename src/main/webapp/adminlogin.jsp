@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Login Page</title>
+<script src="https://kit.fontawesome.com/288fc987b1.js" crossorigin="anonymous"></script>
 <style>
 * {
 	margin: 0;
@@ -118,6 +119,12 @@ body {
 .social i:hover {
     transform: scale(1.2);
 }
+.errmsg {
+	color: red;
+	text-align: center;
+	margin: 10px 2px;
+	font-size: 19px;
+}
 @media ( max-width : 500px) {
 	.login-container {
 		padding: 15px;
@@ -131,6 +138,11 @@ body {
 <body>
 	<div class="login-container">
 		<h2>Admin Login</h2>
+		<% String msg = (String) session.getAttribute("msg");
+		   if (msg != null) { %>
+			   <p class="errmsg"><%= msg %></p>
+		<% }
+		session.removeAttribute("msg"); %>
 		<form action="verifyadmin" method="post">
 			<div class="form-group">
 				<label for="email">Email Address</label>
