@@ -13,7 +13,7 @@
 		<ul class="nav-links">
 			<li class="nav-item active" id="add-course"><a href="adminhome.jsp">All Courses</a></li>
 			<li class="nav-item" id="view-courses"><a href="addcourse.jsp">Add Course</a></li>
-			<li class="nav-item" id="add-assignments"><a href="#">Add Assignments</a></li>
+			<li class="nav-item" id="add-assignments"><a href="addassign.jsp">Add Assignments</a></li>
 			<li class="nav-item" id="add-mcqs"><a href="addmcq.jsp">Add MCQs</a></li>
 		</ul>
 	</div>

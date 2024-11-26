@@ -125,7 +125,7 @@
 				<div class="logo">Admin Panel</div>
 				<ul class="nav-links">
 					<li class="nav-item active" id="add-course"><a href="adminhome.jsp">Active Courses</a></li>
-					<li class="nav-item" id="add-assignments"><a href="#">Assignments</a></li>
+					<li class="nav-item" id="add-assignments"><a href="assign.jsp">Assignments</a></li>
 					<li class="nav-item" id="add-mcqs"><a href="mymcqs.jsp">MCQs</a></li>
 				</ul>
 			</div>

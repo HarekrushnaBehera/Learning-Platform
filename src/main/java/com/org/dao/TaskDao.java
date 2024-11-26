@@ -6,36 +6,36 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import org.springframework.stereotype.Component;
-
-import com.org.daointer.McqDaoInter;
-import com.org.dto.Mcq;
+import com.org.daointer.TaskDaoInter;
+import com.org.dto.Task;
 import com.org.utility.Helpers;
 
-public class McqDao implements McqDaoInter {
-	
+public class TaskDao implements TaskDaoInter {
+
 	static EntityManager em = Helpers.getEMF().createEntityManager();
 
-	public boolean addMcq(Mcq m) {
+	public boolean addTask(Task t) {
 		EntityTransaction transaction = em.getTransaction();
 		transaction.begin();
-		em.persist(m);
+		em.persist(t);
 		transaction.commit();
 		return true;
 	}
 	
-	public List<Mcq> viewAllMcq() {
-		Query query = em.createQuery("select m from Mcq m");
-		List<Mcq> list = query.getResultList();
+	@Override
+	public List<Task> viewAllTask() {
+		Query query = em.createQuery("select t from Task t");
+		List<Task> list = query.getResultList();
 		return list;
 	}
-	
+
 	@Override
-	public void deleteMcq(int id) {
+	public void deleteTask(int id) {
 		EntityTransaction transaction = em.getTransaction();
-		Mcq mcq = em.find(Mcq.class, id);
+		Task task = em.find(Task.class, id);
 		transaction.begin();
-		em.remove(mcq);
+		em.remove(task);
 		transaction.commit();
 	}
+
 }

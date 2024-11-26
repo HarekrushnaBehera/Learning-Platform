@@ -45,7 +45,7 @@ public class AddCourses extends HttpServlet {
 			session.setAttribute("added", "Course Added Successfully");
 			res.sendRedirect("adminhome.jsp");
 		} else {
-			session.setAttribute("notadded", "Semething Went Wrong");
+			session.setAttribute("notadded", "Something Went Wrong");
 			res.sendRedirect("addcourse.jsp");
 		}
 	}

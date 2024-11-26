@@ -98,6 +98,10 @@
 	border: none;
 	background: none;
 }
+.msg {
+	color: green;
+	font: 19px;
+}
 @media (min-width: 993px) {
     .course-card {
         width: 30%;
@@ -126,6 +130,11 @@
 			<%@ include file="/components/sidebar.jsp"%>
 			<section class="course-section">
 				<h1>All Active Courses</h1>
+				<% String msg = (String) session.getAttribute("added");
+				if (msg != null) { %>
+					<p class="msg"><%=msg%></p>
+				<% }
+				session.removeAttribute("added"); %>
 				<div class="course-container">
 				<% for (Course course : courses) { %>
 					<div class="course-card">

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@page import="com.org.dto.Mcq"%>
-<%@page import="com.org.service.McqService"%>
-<%@page import="com.org.serviceinter.McqServiceInter"%>
+    <%@page import="com.org.dto.Task"%>
+<%@page import="com.org.service.TaskService"%>
+<%@page import="com.org.serviceinter.TaskServiceInter"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
@@ -114,33 +114,43 @@ label {
 	display: block;
 	margin-bottom: 5px;
 }
+textarea {
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 8px;
+	background-color: #0a0a0a1f;
+	margin: 5px 0px;
+	box-sizing: border-box;
+	outline: none;
+}
 </style>
 </head>
 <body>
-	<% McqServiceInter mdao = new McqService();
-	   List<Mcq> mcqs = mdao.viewAllMcq();
-	   if (mcqs != null) { %>
+	<% TaskServiceInter mdao = new TaskService();
+	   List<Task> tasks = mdao.viewAllTask();
+	   if (tasks != null) { %>
 		<%@ include file="/components/userNavbar.jsp"%>
 		<div class="all">
 			<div class="sidebar">
 				<div class="logo">Admin Panel</div>
 				<ul class="nav-links">
 					<li class="nav-item" id="add-course"><a href="userhome.jsp">Active Courses</a></li>
-					<li class="nav-item" id="add-assignments"><a href="assign.jsp">Assignments</a></li>
-					<li class="nav-item active" id="add-mcqs"><a href="mymcqs.jsp">MCQs</a></li>
+					<li class="nav-item active" id="add-assignments"><a href="assign.jsp">Assignments</a></li>
+					<li class="nav-item" id="add-mcqs"><a href="mymcqs.jsp">MCQs</a></li>
 				</ul>
 			</div>
 			<section class="mcq_section">
 				<div class="questions">
 					<h1>Multiple Choice Questions :</h1>
 					<form id="quizForm" action="valuequiz">
-						<% for (Mcq mcq : mcqs) { %>
+						<% for (Task task : tasks) { %>
 						<div class="question">
-							<p><strong><%=mcq.getQuestion()%></strong></p>
-							<label><input type="radio" name="q<%=mcq.getId()%>" value="<%=mcq.getOption1()%>"><%=mcq.getOption1()%></label>
-							<label><input type="radio" name="q<%=mcq.getId()%>" value="<%=mcq.getOption1()%>"><%=mcq.getOption1()%></label>
-							<label><input type="radio" name="q<%=mcq.getId()%>" value="<%=mcq.getOption3()%>"><%=mcq.getOption3()%></label>
-							<label><input type="radio" name="q<%=mcq.getId()%>" value="<%=mcq.getOption4()%>"><%=mcq.getOption4()%></label>
+							<p><strong><%=task.getQuestion()%></strong></p>
+							<div class="input-group">
+								<label>Answer :</label>
+								<textarea id="answer" name="answer" rows="10"></textarea>
+							</div>
 						</div>
 						<% } %>
 						<button type="button" onclick="submitQuiz()">Submit</button>
@@ -160,7 +170,7 @@ label {
 				</ul>
 			</div>
 			<section class="mcq_section">
-				<h1>No MCQs are there to show</h1>
+				<h1>No Assignments are there to show</h1>
 			</section>
 		</div>
 	<% } %>

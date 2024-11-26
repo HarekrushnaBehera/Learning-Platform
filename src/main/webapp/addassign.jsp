@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="com.org.dto.Mcq"%>
+<%@page import="com.org.dto.Task"%>
 <%@page import="com.org.dto.User"%>
-<%@page import="com.org.service.McqService"%>
-<%@page import="com.org.serviceinter.McqServiceInter"%>
+<%@page import="com.org.service.TaskService"%>
+<%@page import="com.org.serviceinter.TaskServiceInter"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Add MCQs</title>
+<title>Add Assignments</title>
 <link rel="stylesheet" type="text/css" href="./styles/sidebar.css">
 <script src="https://kit.fontawesome.com/288fc987b1.js" crossorigin="anonymous"></script>
 <style>
@@ -77,11 +77,11 @@ button:hover {
 	color: white;
 }
 
-.questions {
+.question {
 	margin: 20px 0px;
 }
 
-.questions label {
+.question label {
 	display: block;
 	margin: 5px 0;
 }
@@ -119,6 +119,7 @@ label {
 .delm {
 	font-size: 15px;
 	padding: 1px 5px;
+	margin-left: 8px;
 	color: black;
 }
 </style>
@@ -126,9 +127,9 @@ label {
 <body>
 	<% User user = (User) session.getAttribute("userObj");
 	   if (user != null) {
-		   McqServiceInter mdao = new McqService();
-		   List<Mcq> mcqs = mdao.viewAllMcq();
-		   if (mcqs != null) { %>
+		   TaskServiceInter mdao = new TaskService();
+		   List<Task> tasks = mdao.viewAllTask();
+		   if (tasks != null) { %>
 			<%@ include file="/components/userNavbar.jsp"%>
 			<div class="all">
 				<div class="sidebar">
@@ -136,47 +137,30 @@ label {
 					<ul class="nav-links">
 						<li class="nav-item" id="add-course"><a href="adminhome.jsp">Active Courses</a></li>
 						<li class="nav-item" id="add-course"><a href="addcourse.jsp">Add Course</a></li>
-						<li class="nav-item" id="add-assignments"><a href="addassign.jsp">Add Assignments</a></li>
-						<li class="nav-item active" id="add-mcqs"><a href="addmcq.jsp">Add MCQs</a></li>
+						<li class="nav-item active" id="add-assignments"><a href="addassign.jsp">Add Assignments</a></li>
+						<li class="nav-item" id="add-mcqs"><a href="addmcq.jsp">Add MCQs</a></li>
 					</ul>
 				</div>
 				<section class="mcq_section">
 					<div class="questions">
-						<h1>Multiple Choice Questions :</h1>
+						<h1>Active Assignments :</h1>
 						<form id="quizForm" action="valuequiz">
-							<% for (Mcq mcq : mcqs) { %>
+							<% for (Task task : tasks) { %>
 							<div class="question">
-								<p><strong><%=mcq.getQuestion()%></strong><a class="delm" href="delmcq?cid=<%=mcq.getId()%>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></p>
-								<label><input type="radio" name="q<%=mcq.getId()%>" value="<%=mcq.getOption1()%>"><%=mcq.getOption1()%></label>
-								<label><input type="radio" name="q<%=mcq.getId()%>" value="<%=mcq.getOption1()%>"><%=mcq.getOption1()%></label>
-								<label><input type="radio" name="q<%=mcq.getId()%>" value="<%=mcq.getOption3()%>"><%=mcq.getOption3()%></label>
-								<label><input type="radio" name="q<%=mcq.getId()%>" value="<%=mcq.getOption4()%>"><%=mcq.getOption4()%></label>
+								<p><strong><%=task.getQuestion()%></strong><a class="delm" href="delmcq?tid=<%=task.getId()%>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></p>
 							</div>
 							<% } %>
 						</form>
 						<p id="result"></p>
 					</div>
-					<form class="addmc" action="addmcq" method="POST">
+					<form class="addmc" action="addtask" method="POST">
 						<div class="input-group">
 							<label for="question">Question:</label>
-							<textarea id="question" name="question" rows="3"></textarea>
+							<textarea id="question" name="question" rows="2"></textarea>
 						</div>
 						<div class="input-group">
-							<label>Options:</label> <input type="text" name="option1"
-								placeholder="option-1"> <input type="text" name="option2"
-								placeholder="option-2"> <input type="text" name="option3"
-								placeholder="option-3"> <input type="text" name="option4"
-								placeholder="option-4">
-						</div>
-						<div class="input-group">
-							<label for="singleInput">Answer:</label> <select id="answer"
-								name="answer" required>
-								<option value="">Correct Option</option>
-								<option value="option1">option-1</option>
-								<option value="option2">option-2</option>
-								<option value="option3">option-3</option>
-								<option value="option4">option-4</option>
-							</select>
+							<label>Answer :</label>
+							<textarea id="answer" name="answer" rows="5"></textarea>
 						</div>
 						<button type="submit">Add</button>
 					</form>
@@ -189,32 +173,19 @@ label {
 					<div class="logo">Admin Panel</div>
 					<ul class="nav-links">
 						<li class="nav-item" id="add-course"><a href="adminhome.jsp">Active Courses</a></li>
-						<li class="nav-item" id="add-assignments"><a href="#">Assignments</a></li>
+						<li class="nav-item" id="add-assignments"><a href="addassign.jsp">Assignments</a></li>
 						<li class="nav-item active" id="add-mcqs"><a href="addmcq.jsp">MCQs</a></li>
 					</ul>
 				</div>
 				<section class="mcq_section">
-					<form class="addmc" action="addmcq" method="POST">
+					<form class="addmc" action="addtask" method="POST">
 						<div class="input-group">
 							<label for="question">Question:</label>
 							<textarea id="question" name="question" rows="3"></textarea>
 						</div>
 						<div class="input-group">
-							<label>Options:</label>
-							<input type="text" name="option1" placeholder="option-1">
-							<input type="text" name="option2" placeholder="option-2">
-							<input type="text" name="option3" placeholder="option-3">
-							<input type="text" name="option4" placeholder="option-4">
-						</div>
-						<div class="input-group">
-							<label for="singleInput">Answer:</label>
-							<select id="answer" name="answer" required>
-								<option value="">Correct Option</option>
-								<option value="option1">option-1</option>
-								<option value="option2">option-2</option>
-								<option value="option3">option-3</option>
-								<option value="option4">option-4</option>
-							</select>
+							<label>Answer :</label>
+							<textarea id="answer" name="answer" rows="5"></textarea>
 						</div>
 						<button type="submit">Add</button>
 					</form>
