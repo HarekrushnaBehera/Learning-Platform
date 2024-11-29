@@ -13,10 +13,10 @@
 			<a href="#">EduSite</a>
 		</div>
 		<ul class="nav-links">
-			<li><a href="#">Home</a></li>
-			<li><a href="#">About</a></li>
-			<li><a href="#">Courses</a></li>
-			<li><a href="#">Contact</a></li>
+			<li><a href="index.jsp">Home</a></li>
+			<li><a href="about.jsp">About</a></li>
+			<li><a href="index.jsp">Courses</a></li>
+			<li><a href="contact.jsp">Contact</a></li>
 		</ul>
 		<div class="reg">
 			<a href="register.jsp">Signup</a>

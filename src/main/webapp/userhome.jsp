@@ -138,7 +138,7 @@
 						<p class="course-description"><%= course.getDescription() %></p>
 						<p class="course-duration">Duration: <%= course.getDuration() %></p>
 						<p class="course-price"><strong>Price:</strong><%= course.getPrice() %></p>
-						<a href="savecourse?cid=<%=course.getId()%>" class="enroll-btn">Enroll Now</a>
+						<a href="#" class="enroll-btn">Enroll Now</a>
 					</div>
 				<% } %>
 				</div>
